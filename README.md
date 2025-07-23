@@ -4,15 +4,16 @@ Zihan Kou - 524541 - gswskyle
 
 
 <br><br><br><br><br><br><br><br><br>
-Rubric - Pokemon TCG Review
+Rubric - Pokemon TCG Review Website
 | Possible | Feature                                                                          | 
 |----------|----------------------------------------------------------------------------------|
+| 5        | Submit rubric on time                                                            |
 | 20       | Utilize Vue.js                                                                   |             
-| 5        | Users can log in their accounts                                                  |             
+| 5        | Users can log in their accounts                                                  |
+| 10       | Display of cards can be filtered                                                 |
 | 10       | Users can click each card to see its information                                 |             
-| 10       | Users can write reviews and comments under reviews                               |             
+| 10       | Users can write reviews and comments under reviews(only after logging in)        |             
 | 10       | Users can rate the card and see the rating of each card                          | 
 | 10       | Users can search the cards by its name                                           | 
-| 10       | Display of cards can be filtered                                                 |
 | 20       | Creative portions                                                                |
 
