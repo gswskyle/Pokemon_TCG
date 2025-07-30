@@ -5,8 +5,8 @@ Zihan Kou - 524541 - gswskyle
 Website: http://ec2-3-147-7-216.us-east-2.compute.amazonaws.com/ptcg/index.html
 <br><br>
 Creative Portions:
-- Logged in users can add cards to their wishlist
-- Manage accounts are able to add or delete cards, and delete all reviews and comments
+- Logged in users can add cards to their wishlist and view the wishlist as normal list.
+- Manager accounts are able to add or delete cards, and delete any reviews or comments(One manager account: manager:manager)
 
 
 <br><br><br><br><br><br><br><br><br>
