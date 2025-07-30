@@ -1,6 +1,12 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/OMV07t7y)
 # CSE330
 Zihan Kou - 524541 - gswskyle
+<br><br>
+Website: http://ec2-3-147-7-216.us-east-2.compute.amazonaws.com/ptcg/index.html
+<br><br>
+Creative Portions:
+- Logged in users can add cards to their wishlist
+- Manage accounts are able to add or delete cards, and delete all reviews and comments
 
 
 <br><br><br><br><br><br><br><br><br>
