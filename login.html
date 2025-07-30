@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login / Register</title>
+  <script src="https://unpkg.com/vue@3"></script>
+  <script src="api.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>Pokémon TCG Login</h1>
+
+    <h2>Login</h2>
+    <input type="text" v-model="login.username" placeholder="Username"><br>
+    <input type="password" v-model="login.password" placeholder="Password"><br>
+    <button @click="doLogin">Login</button>
+    <p style="color:red">{{ loginMessage }}</p>
+
+    <h2>Register</h2>
+    <input type="text" v-model="register.username" placeholder="Username"><br>
+    <input type="password" v-model="register.password" placeholder="Password"><br>
+    <button @click="doRegister">Register</button>
+    <p style="color:green">{{ registerMessage }}</p>
+  </div>
+
+  <script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        login: { username: "", password: "" },
+        register: { username: "", password: "" },
+        loginMessage: "",
+        registerMessage: ""
+      };
+    },
+    methods: {
+      doLogin() {
+        API.post("auth.php?action=login", this.login).then(res => {
+          if (res.success) {
+            window.location.href = "index.html"; 
+          } else {
+            this.loginMessage = "Invalid username or password";
+          }
+        });
+      },
+      doRegister() {
+        API.post("auth.php?action=register", this.register).then(res => {
+          if (res.success) {
+            this.registerMessage = "Registration successful. You can log in now.";
+          } else {
+            this.registerMessage = "Username already exists.";
+          }
+        });
+      }
+    }
+  });
+  app.mount("#app");
+  </script>
+</body>
+</html>

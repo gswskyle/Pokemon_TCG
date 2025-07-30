@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pokémon TCG Review</title>
+  <script src="https://unpkg.com/vue@3"></script>
+  <script src="api.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div v-if="loggedIn">
+      <button @click="logout">Logout</button>
+    </div>
+    <div v-else>
+      <a href="login.html">Login / Register</a>
+    </div>
+
+    <h1>Pokémon TCG Review</h1>
+
+    <input type="text" v-model="search" placeholder="Search cards by name..." @input="fetchCards">&nbsp;
+
+    <select v-model="sort" @change="fetchCards">
+      <option value="release_desc">Newest to Oldest</option>
+      <option value="release_asc">Oldest to Newest</option>
+      <option value="rating_desc">Highest Rating</option>
+      <option value="rating_asc">Lowest Rating</option>
+    </select>&nbsp;
+
+    <button v-if="loggedIn" @click="showWishlist = !showWishlist; fetchCards()">
+      {{ showWishlist ? "Show All Cards" : "Show Wishlist" }}
+    </button><br><br> 
+
+    <div v-if="isManager" class="manager-panel">
+      <input type="text" v-model="newCardId" placeholder="Enter ID">
+      <button @click="addCard">Add Card</button>
+      <p style="color:green">{{ managerMessage }}</p>
+    </div>
+
+    <div class="card-list">
+      <div v-for="card in cards" :key="card.id" class="card">
+        <a :href="'card.html?id=' + card.id">
+          <img :src="card.image_url" :alt="card.name" class="card-img">
+        </a>
+        <p>{{ card.name }}</p>
+        <p>⭐ {{ Number(card.avg_rating || 0).toFixed(1) }}</p>
+        <button v-if="isManager" @click="deleteCard(card.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

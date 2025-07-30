@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Card Info</title>
+  <script src="https://unpkg.com/vue@3"></script>
+  <script src="api.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <button @click="backHome">⬅</button>
+
+    <h1>{{ card.name }}</h1>
+    <img :src="card.image_url" class="card-img-large">
+
+    <p><b>Set:</b> {{ card.set_name }}</p>
+    <p><b>Release Date:</b> {{ card.set_releaseDate }}</p>
+    <p><b>Artist:</b> {{ card.artist }}</p>
+    <p><b>Rarity:</b> {{ card.rarity }}</p>
+    <!-- <p><b>Market Price:</b> ${{ card.tcgplayer_prices_market }}</p> -->
+
+    <div>
+      <span v-for="n in 5" :key="n" class="star" @click="rateCard(n)">
+        {{ n <= userRating ? "⭐" : "☆" }}
+      </span>
+      <button v-if="userRating" @click="removeRating">Cancel Rating</button>
+    </div>
+
+    <button v-if="loggedIn" @click="toggleWishlist">
+      {{ inWishlist ? "Remove from Wishlist" : "Add to Wishlist" }}
+    </button>
+
+    <h2>Reviews</h2>
+    <div v-for="review in reviews" :key="review.id" class="review">
+      <p><b>{{ review.username }}</b>: {{ review.content }}</p>
+
+      <button v-if="canEdit(review.user_id)" @click="editReview(review)">Edit</button>
+      <button v-if="canEdit(review.user_id) || isManager" @click="deleteReview(review.id)">Delete</button>
+
+      <div class="comments">
+        <p v-for="comment in review.comments" :key="comment.id">
+          <b>{{ comment.username }}</b>: {{ comment.content }}
+
+          <button v-if="canEdit(comment.user_id)" @click="editComment(comment)">Edit</button>
+          <button v-if="canEdit(comment.user_id) || isManager" @click="deleteComment(comment.id)">Delete</button>
+        </p>
+      </div>
+
+      <div v-if="loggedIn">
+        <input v-model="newComments[review.id]" placeholder="Write a comment...">
+        <button @click="addComment(review.id)">Post</button>
+      </div>
+    </div>
+
+    <div v-if="loggedIn">
+      <h3>Write a Review</h3>
+      <textarea v-model="newReview"></textarea>
+      <br>
+      <button @click="addReview">Submit</button>
+    </div>
+
+    <div v-if="showModal" class="modal-overlay">
+      <div class="modal">
+        <h3>Edit {{ modalType }}</h3>
+        <textarea v-model="modalContent"></textarea>
+        <br>
+        <button @click="saveEdit">Save</button>
+        <button @click="cancelEdit">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="card.js"></script>
+</body>
+</html>
